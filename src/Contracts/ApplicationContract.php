@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Sauber\Framework\Contracts;
 
+use Closure;
 use League\Route\Route;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Sauber\Http\HttpKernel;
 use Sauber\Http\Router;
 
@@ -35,60 +37,60 @@ interface ApplicationContract
 
     /**
      * @param string $path
-     * @param mixed $handler
+     * @param class-string<RequestHandlerInterface>|Closure $handler
      * @return Route
      */
-    public function get(string $path, mixed $handler): Route;
+    public function get(string $path, string|Closure $handler): Route;
 
     /**
      * @param string $path
-     * @param mixed $handler
+     * @param class-string<RequestHandlerInterface>|Closure $handler
      * @return Route
      */
-    public function post(string $path, mixed $handler): Route;
+    public function post(string $path, string|Closure $handler): Route;
 
     /**
      * @param string $path
-     * @param mixed $handler
+     * @param class-string<RequestHandlerInterface>|Closure $handler
      * @return Route
      */
-    public function put(string $path, mixed $handler): Route;
+    public function put(string $path, string|Closure $handler): Route;
 
     /**
      * @param string $path
-     * @param mixed $handler
+     * @param class-string<RequestHandlerInterface>|Closure $handler
      * @return Route
      */
-    public function patch(string $path, mixed $handler): Route;
+    public function patch(string $path, string|Closure $handler): Route;
 
     /**
      * @param string $path
-     * @param mixed $handler
+     * @param class-string<RequestHandlerInterface>|Closure $handler
      * @return Route
      */
-    public function delete(string $path, mixed $handler): Route;
+    public function delete(string $path, string|Closure $handler): Route;
 
     /**
      * @param string $path
-     * @param mixed $handler
+     * @param class-string<RequestHandlerInterface>|Closure $handler
      * @return Route
      */
-    public function head(string $path, mixed $handler): Route;
+    public function head(string $path, string|Closure $handler): Route;
 
     /**
      * @param string $path
-     * @param mixed $handler
+     * @param class-string<RequestHandlerInterface>|Closure $handler
      * @return Route
      */
-    public function options(string $path, mixed $handler): Route;
+    public function options(string $path, string|Closure $handler): Route;
 
     /**
      * @param string $method
      * @param string $path
-     * @param mixed $handler
+     * @param class-string<RequestHandlerInterface>|Closure $handler
      * @return Route
      */
-    public function match(string $method, string $path, mixed $handler): Route;
+    public function match(string $method, string $path, string|Closure $handler): Route;
 
     /**
      * @param ServerRequestInterface $request

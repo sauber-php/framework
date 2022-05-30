@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Sauber\Framework;
 
+use Closure;
 use League\Route\Route;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Sauber\Framework\Contracts\ApplicationContract;
 use Sauber\Http\HttpKernel;
 use Sauber\Http\Request;
@@ -70,10 +72,10 @@ final class Application implements ApplicationContract
 
     /**
      * @param string $path
-     * @param mixed $handler
+     * @param class-string<RequestHandlerInterface>|Closure $handler
      * @return Route
      */
-    public function get(string $path, mixed $handler): Route
+    public function get(string $path, string|Closure $handler): Route
     {
         return $this->match(
             method: 'GET',
@@ -84,10 +86,10 @@ final class Application implements ApplicationContract
 
     /**
      * @param string $path
-     * @param mixed $handler
+     * @param class-string<RequestHandlerInterface>|Closure $handler
      * @return Route
      */
-    public function post(string $path, mixed $handler): Route
+    public function post(string $path, string|Closure $handler): Route
     {
         return $this->match(
             method: 'POST',
@@ -98,10 +100,10 @@ final class Application implements ApplicationContract
 
     /**
      * @param string $path
-     * @param mixed $handler
+     * @param class-string<RequestHandlerInterface>|Closure $handler
      * @return Route
      */
-    public function put(string $path, mixed $handler): Route
+    public function put(string $path, string|Closure $handler): Route
     {
         return $this->match(
             method: 'PUT',
@@ -112,10 +114,10 @@ final class Application implements ApplicationContract
 
     /**
      * @param string $path
-     * @param mixed $handler
+     * @param class-string<RequestHandlerInterface>|Closure $handler
      * @return Route
      */
-    public function patch(string $path, mixed $handler): Route
+    public function patch(string $path, string|Closure $handler): Route
     {
         return $this->match(
             method: 'PATCH',
@@ -126,10 +128,10 @@ final class Application implements ApplicationContract
 
     /**
      * @param string $path
-     * @param mixed $handler
+     * @param class-string<RequestHandlerInterface>|Closure $handler
      * @return Route
      */
-    public function delete(string $path, mixed $handler): Route
+    public function delete(string $path, string|Closure $handler): Route
     {
         return $this->match(
             method: 'DELETE',
@@ -140,10 +142,10 @@ final class Application implements ApplicationContract
 
     /**
      * @param string $path
-     * @param mixed $handler
+     * @param class-string<RequestHandlerInterface>|Closure $handler
      * @return Route
      */
-    public function head(string $path, mixed $handler): Route
+    public function head(string $path, string|Closure $handler): Route
     {
         return $this->match(
             method: 'HEAD',
@@ -154,10 +156,10 @@ final class Application implements ApplicationContract
 
     /**
      * @param string $path
-     * @param mixed $handler
+     * @param class-string<RequestHandlerInterface>|Closure $handler
      * @return Route
      */
-    public function options(string $path, mixed $handler): Route
+    public function options(string $path, string|Closure $handler): Route
     {
         return $this->match(
             method: 'OPTIONS',
@@ -169,10 +171,10 @@ final class Application implements ApplicationContract
     /**
      * @param string $method
      * @param string $path
-     * @param mixed $handler
+     * @param class-string<RequestHandlerInterface>|Closure $handler
      * @return Route
      */
-    public function match(string $method, string $path, mixed $handler): Route
+    public function match(string $method, string $path, string|Closure $handler): Route
     {
         return $this->router()->map(
             method: $method,
